@@ -1,0 +1,119 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/game/scripts/game.gd" type="Script" id=2]
+[ext_resource path="res://scenes/game/visuals/Background.png" type="Texture" id=3]
+[ext_resource path="res://scenes/game/visuals/Star.png" type="Texture" id=4]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.0816327, 0.887755, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 1200, 700, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 5.0
+angular_velocity_random = 0.42
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 720.0
+angle_random = 1.0
+scale = 0.1
+scale_random = 0.25
+color_ramp = SubResource( 3 )
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 1024, 548 )
+texture = ExtResource( 3 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 1017, 509 )
+amount = 75
+lifetime = 100.0
+visibility_rect = Rect2( -1167.55, -668.533, 2339.5, 6232 )
+process_material = SubResource( 1 )
+texture = ExtResource( 4 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 975, 566 )
+
+[node name="SpawnPositions" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Position2D" type="Position2D" parent="SpawnPositions"]
+position = Vector2( -288, -125 )
+
+[node name="Position2D2" type="Position2D" parent="SpawnPositions"]
+position = Vector2( 42, -234 )
+
+[node name="Position2D3" type="Position2D" parent="SpawnPositions"]
+position = Vector2( 404, -247 )
+
+[node name="Position2D4" type="Position2D" parent="SpawnPositions"]
+position = Vector2( 779, -235 )
+
+[node name="Position2D5" type="Position2D" parent="SpawnPositions"]
+position = Vector2( 1162, -247 )
+
+[node name="Position2D6" type="Position2D" parent="SpawnPositions"]
+position = Vector2( 1578, -239 )
+
+[node name="Position2D7" type="Position2D" parent="SpawnPositions"]
+position = Vector2( 2002, -243 )
+
+[node name="Position2D8" type="Position2D" parent="SpawnPositions"]
+position = Vector2( 2208, 15 )
+
+[node name="Position2D9" type="Position2D" parent="SpawnPositions"]
+position = Vector2( 2220, 342 )
+
+[node name="Position2D10" type="Position2D" parent="SpawnPositions"]
+position = Vector2( 2244, 649 )
+
+[node name="Position2D11" type="Position2D" parent="SpawnPositions"]
+position = Vector2( 2236, 1045 )
+
+[node name="Position2D12" type="Position2D" parent="SpawnPositions"]
+position = Vector2( 2022, 1311 )
+
+[node name="Position2D13" type="Position2D" parent="SpawnPositions"]
+position = Vector2( 1643, 1331 )
+
+[node name="Position2D14" type="Position2D" parent="SpawnPositions"]
+position = Vector2( 1280, 1339 )
+
+[node name="Position2D15" type="Position2D" parent="SpawnPositions"]
+position = Vector2( 856, 1343 )
+
+[node name="Position2D16" type="Position2D" parent="SpawnPositions"]
+position = Vector2( 432, 1351 )
+
+[node name="Position2D17" type="Position2D" parent="SpawnPositions"]
+position = Vector2( -12, 1347 )
+
+[node name="Position2D18" type="Position2D" parent="SpawnPositions"]
+position = Vector2( -335, 1238 )
+
+[node name="Position2D19" type="Position2D" parent="SpawnPositions"]
+position = Vector2( -351, 851 )
+
+[node name="Position2D20" type="Position2D" parent="SpawnPositions"]
+position = Vector2( -351, 508 )
+
+[node name="Position2D21" type="Position2D" parent="SpawnPositions"]
+position = Vector2( -367, 193 )
+
+[connection signal="destroyed" from="Player" to="." method="_on_Player_destroyed"]
