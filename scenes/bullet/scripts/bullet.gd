@@ -16,5 +16,5 @@ func _on_Bullet_body_entered(body: Node) -> void:
 	body.take_damage(damage)
 	queue_free()
 
-func _on_VisibilityNotifier2D_viewport_exited(viewport: Viewport) -> void:
+func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()

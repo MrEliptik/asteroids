@@ -1,13 +1,12 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 signal destroyed()
 
-export var bullet_scene: PackedScene = preload("res://scenes/bullet/bullet.tscn")
-export var speed: float = 30.0
-export var rotation_speed: float = 15.0
+@export var bullet_scene: PackedScene = preload("res://scenes/bullet/bullet.tscn")
+@export var speed: float = 30.0
+@export var rotation_speed: float = 15.0
 
 var thrust: float = 0.0
-var velocity: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	pass
@@ -15,7 +14,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var dir: float = Input.get_action_strength("right") - Input.get_action_strength("left")
 	
-	rotation += deg2rad(rotation_speed) * dir * delta
+	rotation += deg_to_rad(rotation_speed) * dir * delta
 	
 	thrust = Input.get_action_strength("thrust")
 	velocity = thrust * speed * global_transform.x
@@ -28,14 +27,10 @@ func _physics_process(delta: float) -> void:
 	
 	# There's no collision, we can return
 	if not collision: return
-	
-	if collision.collider.is_in_group("Asteroids"):
-		# Take damage, or die instantly, it's up to you
-		destroy()
 
 func shoot() -> void:
-	var instance = bullet_scene.instance()
-	var instance2 = bullet_scene.instance()
+	var instance = bullet_scene.instantiate()
+	var instance2 = bullet_scene.instantiate()
 	
 	# Set the direction
 	instance.dir = $BulletPosLeft.global_transform.x

@@ -1,8 +1,8 @@
 extends Node2D
 
-export var asteroid_scene: PackedScene = preload("res://scenes/asteroid/asteroid.tscn")
+@export var asteroid_scene: PackedScene = preload("res://scenes/asteroid/asteroid.tscn")
 
-onready var spawn_pos: Node2D = $SpawnPositions
+@onready var spawn_pos: Node2D = $SpawnPositions
 
 func _ready() -> void:
 	randomize()
@@ -10,9 +10,9 @@ func _ready() -> void:
 	
 func spawn_asteroids(amount: int) -> void:
 	for i in range(amount):
-		var instance = asteroid_scene.instance()
+		var instance = asteroid_scene.instantiate()
 		# Connect the destroyed signal
-		instance.connect("destroyed", self, "on_asteroid_destroyed")
+		instance.connect("destroyed",Callable(self,"on_asteroid_destroyed"))
 		
 		# Get a random position
 		var selected = spawn_pos.get_child(randi()%spawn_pos.get_child_count())
@@ -21,13 +21,13 @@ func spawn_asteroids(amount: int) -> void:
 		# Compute the direction the asteroid will take
 		var center: Vector2 = get_viewport_rect().size / 2.0
 		var dir: Vector2 = (center - random_pos).normalized()
-		dir = dir.rotated(deg2rad(rand_range(-40.0, 40.0)))
+		dir = dir.rotated(deg_to_rad(randf_range(-40.0, 40.0)))
 		instance.dir = dir
 		
 		# Addind the instance to the tree
-		add_child(instance)
+		call_deferred("add_child", instance)
 		# Changing the position, once the node is in the tree
-		instance.global_position = random_pos
+		instance.set_deferred("global_position", random_pos)
 
 func on_asteroid_destroyed() -> void:
 	spawn_asteroids(1)
