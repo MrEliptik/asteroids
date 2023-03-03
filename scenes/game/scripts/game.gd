@@ -1,12 +1,13 @@
 extends Node2D
 
 @export var asteroid_scene: PackedScene = preload("res://scenes/asteroid/asteroid.tscn")
-
 @onready var spawn_pos: Node2D = $SpawnPositions
 
 func _ready() -> void:
 	randomize()
 	spawn_asteroids(5)
+	Globals.camera = $Camera2D
+	$Camera2D.target = $Player
 	
 func spawn_asteroids(amount: int) -> void:
 	for i in range(amount):

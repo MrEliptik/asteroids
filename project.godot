@@ -15,6 +15,10 @@ run/main_scene="res://scenes/game/game.tscn"
 config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 
+[autoload]
+
+Globals="*res://autoload/globals.gd"
+
 [display]
 
 window/size/viewport_width=1920
@@ -22,6 +26,10 @@ window/size/viewport_height=1080
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/trail_2d/plugin.cfg")
 
 [gui]
 
@@ -44,7 +52,7 @@ right={
 thrust={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":90,"physical_keycode":0,"key_label":0,"unicode":122,"echo":false,"script":null)
-, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":7,"axis_value":1.0,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":5,"axis_value":1.0,"script":null)
 ]
 }
 shoot={

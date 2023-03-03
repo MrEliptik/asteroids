@@ -1,9 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://y2ldqrno8d0u"]
+[gd_scene load_steps=11 format=3 uid="uid://y2ldqrno8d0u"]
 
 [ext_resource type="PackedScene" uid="uid://cpdaquuspqkoy" path="res://scenes/player/player.tscn" id="1"]
 [ext_resource type="Script" path="res://scenes/game/scripts/game.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://dsg6aov0nw5gl" path="res://scenes/game/visuals/Background.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://dnoq5gbdev7jo" path="res://scenes/game/visuals/Star.png" id="4"]
+[ext_resource type="Script" path="res://scenes/game/scripts/camera.gd" id="5_cas47"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jm6m8"]
+frequency = 0.003
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uwxyv"]
+width = 3840
+height = 2160
+noise = SubResource("FastNoiseLite_jm6m8")
 
 [sub_resource type="Gradient" id="Gradient_i0aqo"]
 offsets = PackedFloat32Array(0.00892857, 0.21875, 0.90625, 1)
@@ -27,6 +36,14 @@ script = ExtResource("2")
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(1024, 548)
 texture = ExtResource("3")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.113725)
+offset_left = -876.0
+offset_top = -529.0
+offset_right = 2964.0
+offset_bottom = 1631.0
+texture = SubResource("NoiseTexture2D_uwxyv")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 modulate = Color(1, 1, 1, 0.443137)
@@ -104,5 +121,13 @@ position = Vector2(-351, 508)
 
 [node name="Position2D21" type="Marker2D" parent="SpawnPositions"]
 position = Vector2(-367, 193)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+zoom = Vector2(1.2, 1.2)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+script = ExtResource("5_cas47")
 
 [connection signal="destroyed" from="Player" to="." method="_on_Player_destroyed"]
